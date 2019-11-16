@@ -1,0 +1,45 @@
+.sampleLogoSize {
+    height: auto ;
+    width: auto;
+}
+
+.letterColorNavbar{
+    color: black !important;
+    font-size: large;
+    font-weight: bold;
+}
+
+.titleImage{
+    width: auto;
+    height: auto;
+}
+
+
+.color1{
+    background: #F2F3ED;
+}
+
+.color2{
+    background: #7C9897;
+}
+
+.color3{
+    background: #3FC1C9;
+}
+
+.color4{
+    background: #846E5A;
+}
+
+.color5{
+    background: #4C8067;
+}
+
+.mainFont{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 24px;
+}
+
+.jumbotron {
+    background-color:#F2F3ED !important; 
+}
