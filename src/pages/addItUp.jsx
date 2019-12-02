@@ -11,7 +11,8 @@ class AddItUp extends Component {
             foods: [],
             selected: [],
             details: [],
-            searchItem: ''
+            searchItem: '',
+            float: undefined
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -34,7 +35,16 @@ class AddItUp extends Component {
             if (food.brandOwner === undefined) {
                 return (
                     <div className="results">
-                        <h2 className="name">{food.description}</h2>
+                        <h2 className="name"
+                            onClick={event => {
+                                fetch(`https://api.nal.usda.gov/fdc/v1/${food.fdcId}?api_key=ZAc6ym7jFxdoPb1HMJejftTfsTyhKbsKBClreV2K`, {
+                                    headers: {
+                                        "content-Type": "application/json"
+                                    }
+                                }).then(data => data.json()).then(data => this.setState({float: data}));
+                                this.refs.float.className="float";
+                            }}
+                        >{food.description}</h2>
                         <p>{food.additionalDescriptions}</p>
                         <button
                             className="add"
@@ -53,7 +63,16 @@ class AddItUp extends Component {
             } else {
                 return (
                     <div className="results">
-                        <h2 className="name">{food.description}</h2>
+                        <h2 className="name"
+                            onClick={event => {
+                                fetch(`https://api.nal.usda.gov/fdc/v1/${food.fdcId}?api_key=ZAc6ym7jFxdoPb1HMJejftTfsTyhKbsKBClreV2K`, {
+                                    headers: {
+                                        "content-Type": "application/json"
+                                    }
+                                }).then(data => data.json()).then(data => this.setState({float: data}));
+                                this.refs.float.className="float";
+                            }}
+                        >{food.description}</h2>
                         <p className="company">{food.brandOwner.toUpperCase()}</p>
                         <p>{food.additionalDescriptions}</p>
                         <button
@@ -73,6 +92,19 @@ class AddItUp extends Component {
             }
         });
 
+        const float = function(food){
+            if (food != undefined) {
+                const list = food.foodNutrients.map(function(nut) {
+                    return(
+                        <li>{nut.nutrient.name + ": " + nut.nutrient.number + nut.nutrient.unitName}</li>
+                    );
+                });
+                return list;
+            } else {
+                return null;
+            }
+        };
+
         const detail = function(food) {
             const list = food.foodNutrients.map(function(nut) {
                 return(
@@ -83,15 +115,44 @@ class AddItUp extends Component {
         };
 
         const select = this.state.details.map((data) => {
-            return (
-                <div>
-                    <h2>{data.description}</h2>
-                    <ul>
-                        {detail(data)}
-                    </ul>
-
-                </div>
-            );
+            if (data.brandOwner != undefined) {
+                return (
+                    <div>
+                        <h2>{data.description}</h2>
+                        <p>{data.brandOwner.toUpperCase()}</p>
+                        {/*<ul>*/}
+                        {/*    {detail(data)}*/}
+                        {/*</ul>*/}
+                        <button onClick={event => {
+                            const removedIdx = this.state.details.indexOf(data);
+                            const copy = this.state.details.map(x => x);
+                            const left = copy.slice(0, removedIdx).concat(copy.slice(removedIdx + 1, copy.length));
+                            this.setState({details: left});
+                        }
+                        }>
+                            delete
+                        </button>
+                    </div>
+                );
+            } else {
+                return (
+                    <div>
+                        <h2>{data.description}</h2>
+                        {/*<ul>*/}
+                        {/*    {detail(data)}*/}
+                        {/*</ul>*/}
+                        <button onClick={event => {
+                            const removedIdx = this.state.details.indexOf(data);
+                            const copy = this.state.details.map(x => x);
+                            const left = copy.slice(0, removedIdx).concat(copy.slice(removedIdx + 1, copy.length));
+                            this.setState({details: left});
+                        }
+                        }>
+                            delete
+                        </button>
+                    </div>
+                );
+            }
         });
 
 
@@ -112,6 +173,19 @@ class AddItUp extends Component {
                         Search
                     </button>
                 </form>
+
+                <div onClick={event => {
+                    this.setState({float: undefined})
+                    this.refs.float.className = "float d";
+                    }
+                }
+                     className="float d"
+                     ref="float"
+                >
+                    <ul>
+                        {float(this.state.float)}
+                    </ul>
+                </div>
                 <div className="outer">
                     <div className="display">
                         {items}
@@ -120,6 +194,9 @@ class AddItUp extends Component {
                     <div className="selected">
                         {select}
                     </div>
+
+
+
                 </div>
                 <Footer/>
             </Container>

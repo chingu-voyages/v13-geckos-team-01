@@ -40,3 +40,28 @@ button {
     flex-direction: column;
     overflow: scroll;
 }
+
+.d {
+    display: none;
+}
+
+.float {
+    position: fixed;
+    width: 50vw;
+    height: 80vh;
+    top: 10vh;
+    left: 25vw;
+    animation: float 1.5s;
+    overflow: scroll;
+    background: #9fcdff;
+}
+
+@keyframes float {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
