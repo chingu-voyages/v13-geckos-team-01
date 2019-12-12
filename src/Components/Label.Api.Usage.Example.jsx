@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Container, Table} from 'react-bootstrap'
+import { Container, Table } from "react-bootstrap";
 
+import sampleData2 from "./LabelSample2.json";
 
-import sampleData2 from './LabelSample2.json'
-
-{/* 
+{
+  /* 
   e.g. Search for Cheddar cheese in the Food Search endpoint 
 
   curl -H "Content-Type:application/json" -d '{"generalSearchInput":"Cheddar cheese"}' https://api.nal.usda.gov/fdc/v1/search?api_key=4VLJS8sDoHqDFzeZDntLwkDHQwv66u2fWTVHyLOV
@@ -56,7 +56,8 @@ Formatted JSON Data
    "changes":""
 }
 
-*/}
+*/
+}
 
 class Label extends React.Component {
   constructor(props) {
@@ -65,65 +66,110 @@ class Label extends React.Component {
       name: sampleData2
     };
   }
-  render (){
-    
+  render() {
     return (
-        <Container>
-          {console.log(JSON.stringify(this.state.name))}
+      <Container>
+        {console.log(JSON.stringify(this.state.name))}
 
-            
-            <h2 className="text-center">Nutrition facts of your meal</h2>
-            <h3>Portion </h3>
+        <h2 className="text-center">Nutrition facts of your meal</h2>
+        <h3>Portion </h3>
         <Table responsive>
-            
-            <thead>
-                <tr>
-                <th>Item</th>
-                <th>Percentage</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td><strong>Calories: {(JSON.stringify(this.state.name.labelNutrients.calories.value))} g</strong></td>
-                <td>12%</td>
-                </tr>
-                <tr>
-                <td><strong>Total Fat : {(JSON.stringify(this.state.name.labelNutrients.fat.value))} g  </strong></td>
-                <td>12%</td>
-                </tr>
-                <tr>
-                <td><i>    Saturated fat : {(JSON.stringify(this.state.name.labelNutrients.saturatedFat.value))} g</i></td>
-                <td>12%</td>
-                </tr>
-                <tr>
-                <td><i>    Trans fat : {(JSON.stringify(this.state.name.labelNutrients.transFat.value))} g</i></td>
-                <td>12%</td>
-                </tr>
-                <tr>
-                <td><strong>Cholesterol: number</strong></td>
-                <td>12%</td>
-                </tr>
-                <tr>
-                <td><strong>Sodium: {(JSON.stringify(this.state.name.labelNutrients.sodium.value))} g</strong></td>
-                <td>12%</td>
-                </tr>
-                <tr>
-                <td><strong>Total Carbohydrate: {(JSON.stringify(this.state.name.labelNutrients.carbohydrates.value))} g</strong></td>
-                <td>12%</td>
-                </tr>
-                <tr>
-                <td><strong>Protein: {(JSON.stringify(this.state.name.labelNutrients.protein.value))} g</strong></td>
-                <td>12%</td>
-                </tr>
-       
-            </tbody>
-            <h5> Ingredients: {(JSON.stringify(this.state.name.ingredients))}</h5>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Percentage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>
+                  Calories:{" "}
+                  {JSON.stringify(
+                    this.state.name.labelNutrients.calories.value
+                  )}{" "}
+                  g
+                </strong>
+              </td>
+              <td>12%</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  Total Fat :{" "}
+                  {JSON.stringify(this.state.name.labelNutrients.fat.value)} g{" "}
+                </strong>
+              </td>
+              <td>12%</td>
+            </tr>
+            <tr>
+              <td>
+                <i>
+                      Saturated fat :{" "}
+                  {JSON.stringify(
+                    this.state.name.labelNutrients.saturatedFat.value
+                  )}{" "}
+                  g
+                </i>
+              </td>
+              <td>12%</td>
+            </tr>
+            <tr>
+              <td>
+                <i>
+                      Trans fat :{" "}
+                  {JSON.stringify(
+                    this.state.name.labelNutrients.transFat.value
+                  )}{" "}
+                  g
+                </i>
+              </td>
+              <td>12%</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Cholesterol: number</strong>
+              </td>
+              <td>12%</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  Sodium:{" "}
+                  {JSON.stringify(this.state.name.labelNutrients.sodium.value)}{" "}
+                  g
+                </strong>
+              </td>
+              <td>12%</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  Total Carbohydrate:{" "}
+                  {JSON.stringify(
+                    this.state.name.labelNutrients.carbohydrates.value
+                  )}{" "}
+                  g
+                </strong>
+              </td>
+              <td>12%</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  Protein:{" "}
+                  {JSON.stringify(this.state.name.labelNutrients.protein.value)}{" "}
+                  g
+                </strong>
+              </td>
+              <td>12%</td>
+            </tr>
+          </tbody>
+          <h5> Ingredients: {JSON.stringify(this.state.name.ingredients)}</h5>
         </Table>
-</Container>
-        
-    )}
+      </Container>
+    );
+  }
 }
 
-
-
-export default Label
+export default Label;

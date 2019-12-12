@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-const Label = ({names, units, values}) => {
+const Label = ({ names, units, values }) => {
+  return (
+    <tbody>
+      <tr>
+        <td>
+          <strong>{names}</strong>
+        </td>
+        <td>{values}</td>
+        <td>{units}</td>
+      </tr>
+    </tbody>
+  );
+};
 
-    return (
-
-            <tbody>
-                <tr>
-                <td><strong>{names}</strong></td>
-                <td>{values}</td>
-                <td>{units}</td>
-                </tr>       
-            </tbody>
-
-    )
-}
-
-export default Label
+export default Label;
